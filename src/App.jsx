@@ -16,6 +16,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import VerticalAlignBottomIcon from "@mui/icons-material/VerticalAlignBottom";
 import VerticalAlignTopIcon from "@mui/icons-material/VerticalAlignTop";
+import PersonIcon from '@mui/icons-material/Person';
 import { AppProvider } from "@toolpad/core/react-router-dom";
 import { Outlet } from "react-router-dom";
 
@@ -29,6 +30,11 @@ const NAVIGATION = [
     segment: "admin/users",
     title: "User Management",
     icon: <PeopleAltIcon />,
+  },
+  {
+    segment: "admin/mlm-user",
+    title: "MLM user",
+    icon: <PersonIcon />,
   },
   {
     segment: "admin/vendors",

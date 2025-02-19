@@ -38,6 +38,8 @@ import UserManagement from "./pages/userManagement/UserManagement.jsx";
 import SingleVendorDetailsView from "./pages/vendorManagement/singleVendorDetailsView/SingleVendorDetailsView.jsx";
 import VendorDetail from "./pages/vendorManagement/vendorApprovalRequests/VendorDetail.jsx";
 import VendorManagement from "./pages/vendorManagement/vendorManagement.jsx";
+import MlmUser from "./pages/MLM User/MlmUser.jsx";
+import MlmDetails from "./pages/MLM User/MlmDetails.jsx";
 const router = createBrowserRouter([
   {
     path: "/", // Login route
@@ -60,6 +62,14 @@ const router = createBrowserRouter([
           {
             path: "/admin/users",
             element: <UserManagement />,
+          },
+          {
+            path:"/admin/mlm-user",
+            element:<MlmUser/>,
+          },
+          {
+            path:"/admin/mlm-details",
+            element:<MlmDetails/>,
           },
           {
             path: "/admin/users/:id",
