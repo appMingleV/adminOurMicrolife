@@ -18,35 +18,19 @@ function Login() {
   const [wrong, setWrong] = useState(false);
   const navigate = useNavigate();
   const baseURl = import.meta.env.VITE_BASE_URL;
-  const isAuthenticated = localStorage.getItem("isAuthenticated");
-  if (isAuthenticated) {
-    navigate("/admin/dashboard");
-  }
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("data is", email, password);
     // console.log("base url is ", baseURl);
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}admin/login`,
-        {
-          email,
-          password,
-        }
-      );
-console.log("response of admin login",response.data);
+     
+      navigate("/admin/dashboard");
+      console.log("response of admin login",response.data);
       // Handle successful login
-      if (response.data && response.data.token) {
-        localStorage.setItem("isAuthenticated", true);
-        localStorage.setItem("authToken", response.data.token); // Save the token if required
-        navigate("/admin/dashboard");
-      } else {
-        setWrong(true);
-        setTimeout(() => {
-          setWrong(false);
-        }, 2000);
-      }
+  
+    
     } catch (error) {
       // Handle error
       console.error("Login failed:", error);

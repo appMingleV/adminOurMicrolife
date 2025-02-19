@@ -43,7 +43,7 @@ const VendorManagement = () => {
   };
  
 
-  const paginatedVendors = filteredVendors().slice(
+  const paginatedVendors = filteredVendors()?.slice(
     (page - 1) * rowsPerPage,
     page * rowsPerPage
   );
@@ -62,7 +62,7 @@ const VendorManagement = () => {
     } catch (error) {
       console.error(
         "Error in fetching vendor list:",
-        error.response?.data || error.message
+        error?.response?.data || error.message
       );
     }
   };
@@ -89,14 +89,14 @@ const VendorManagement = () => {
         {/* Stats Section */}
         <Box display="grid" gridTemplateColumns="repeat(5, 1fr)" gap={2} mt={3}>
           {[
-            { label: "Total Vendor", value: vendors.length },
+            { label: "Total Vendor", value: vendors?.length },
             {
               label: "Approved Vendor",
-              value: vendors.filter((v) => v.status === "Approved").length,
+              value: vendors?.filter((v) => v?.status === "Approved")?.length,
             },
             {
               label: "Pending Vendor",
-              value: vendors.filter((v) => v.status === "Pending").length,
+              value: vendors?.filter((v) => v?.status === "Pending")?.length,
             },
           ].map((stat, index) => (
             <Card
@@ -195,7 +195,7 @@ const VendorManagement = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {paginatedVendors.map((vendor, index) => (
+                {paginatedVendors?.map((vendor, index) => (
                   <TableRow key={vendor.id}>
                     <TableCell>
                       {index + 1 + (page - 1) * rowsPerPage}
@@ -232,7 +232,7 @@ const VendorManagement = () => {
           {/* Pagination */}
           <Box display="flex" justifyContent="center" mt={2}>
             <Pagination
-              count={Math.ceil(filteredVendors().length / rowsPerPage)}
+              count={Math?.ceil(filteredVendors()?.length / rowsPerPage)}
               page={page}
               onChange={handlePageChange}
               variant="outlined"
