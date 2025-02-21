@@ -40,6 +40,7 @@ import VendorDetail from "./pages/vendorManagement/vendorApprovalRequests/Vendor
 import VendorManagement from "./pages/vendorManagement/vendorManagement.jsx";
 import MlmUser from "./pages/MLM User/MlmUser.jsx";
 import MlmDetails from "./pages/MLM User/MlmDetails.jsx";
+import MyContextProvider from "./context/MyContext.jsx";
 const router = createBrowserRouter([
   {
     path: "/", // Login route
@@ -48,7 +49,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin/", // Main application route
-    element: <App />,
+    element: (
+      <MyContextProvider>
+        <App />
+      </MyContextProvider>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
@@ -64,12 +69,12 @@ const router = createBrowserRouter([
             element: <UserManagement />,
           },
           {
-            path:"/admin/mlm-user",
-            element:<MlmUser/>,
+            path: "/admin/mlm-user",
+            element: <MlmUser />,
           },
           {
-            path:"/admin/mlm-details",
-            element:<MlmDetails/>,
+            path: "/admin/mlm-details/:id",
+            element: <MlmDetails />,
           },
           {
             path: "/admin/users/:id",
