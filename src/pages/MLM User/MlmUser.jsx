@@ -149,7 +149,7 @@ const MlmUser = () => {
                         <TableCell>{row?.transition_id}</TableCell>
                         <TableCell>
                           <img
-                            src={row?.image}
+                            src={`https://api.ourmicrolife.com/uploads/userProfile/${row?.image}`}
                             alt={row.fullName}
                             width="50"
                             height="50"

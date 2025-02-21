@@ -75,7 +75,7 @@ const MlmDetails = () => {
           {/* User Image */}
           <div className="flex justify-center">
             <img
-              src={`https://api.ourmicrolife.com/uploads/vendor/${singleNewMlmUser?.image}`}
+              src={`https://api.ourmicrolife.com/uploads/userProfile/${singleNewMlmUser?.image}`}
               alt="User"
               className="w-32 h-32 rounded-lg object-cover shadow-md border border-gray-200"
             />
