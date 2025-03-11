@@ -43,12 +43,7 @@ import MlmDetails from "./pages/MLM User/MlmDetails.jsx";
 import MyContextProvider from "./context/MyContext.jsx";
 const router = createBrowserRouter([
   {
-    path: "/", // Login route
-    element: <Login />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/admin/", // Main application route
+    path: "/", // Main application route
     element: (
       <MyContextProvider>
         <App />
@@ -57,7 +52,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/admin/", // Layout with nested routes
+        path: "/", // Layout with nested routes
         element: <Layout />,
         children: [
           {
