@@ -31,11 +31,11 @@ const NAVIGATION = [
     title: "User Management",
     icon: <PeopleAltIcon />,
   },
-  {
-    segment: "admin/mlm-user",
-    title: "MLM user",
-    icon: <PersonIcon />,
-  },
+  // {
+  //   segment: "admin/mlm-user",
+  //   title: "MLM user",
+  //   icon: <PersonIcon />,
+  // },
   {
     segment: "admin/vendors",
     title: "Vendor Management",

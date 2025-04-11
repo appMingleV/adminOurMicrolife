@@ -64,10 +64,6 @@ const router = createBrowserRouter([
             element: <UserManagement />,
           },
           {
-            path: "/admin/mlm-user",
-            element: <MlmUser />,
-          },
-          {
             path: "/admin/mlm-details/:id",
             element: <MlmDetails />,
           },
