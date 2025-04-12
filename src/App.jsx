@@ -19,6 +19,9 @@ import VerticalAlignTopIcon from "@mui/icons-material/VerticalAlignTop";
 import PersonIcon from "@mui/icons-material/Person";
 import { AppProvider } from "@toolpad/core/react-router-dom";
 import { Outlet } from "react-router-dom";
+import socket from "./socket.js";
+import { toast, ToastContainer } from "react-toastify";
+import { useEffect } from "react";
 
 const NAVIGATION = [
   {
@@ -120,6 +123,35 @@ const NAVIGATION = [
 ];
 
 const App = () => {
+
+  const showToast = (type, message) => {
+    if (type === "success") {
+      console.log("success");
+      toast.success(message);
+    } else if (type === "error") {
+      toast.error(message);
+    } else {
+      toast(message);
+    }
+  };
+  console.log("---------->", showToast);
+  useEffect(() => {
+    socket.emit("register", {
+      role: "ecommerceAdmin",
+      userId: "10",
+    });
+    const handleOrderNotification = (data) => {
+      console.log("toast here");
+      // showToast("success","successfulll!!!")
+      showToast("success", ` order received to! Vendor ID: ${data}`);
+    };
+    socket.on("order-recieve-to-vendor", handleOrderNotification);
+    return () => {
+      socket.off("order-recieve-to-vendor", handleOrderNotification);
+    };
+  }, []);
+
+
   return (
     <AppProvider
       navigation={NAVIGATION}
@@ -129,6 +161,7 @@ const App = () => {
       }}
     >
       <Outlet />
+      <ToastContainer />
     </AppProvider>
   );
 };
