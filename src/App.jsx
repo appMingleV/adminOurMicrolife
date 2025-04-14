@@ -123,7 +123,6 @@ const NAVIGATION = [
 ];
 
 const App = () => {
-
   const showToast = (type, message) => {
     if (type === "success") {
       console.log("success");
@@ -150,7 +149,6 @@ const App = () => {
       socket.off("order-recieve-to-vendor", handleOrderNotification);
     };
   }, []);
-
 
   return (
     <AppProvider
