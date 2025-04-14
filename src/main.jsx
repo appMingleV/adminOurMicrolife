@@ -41,7 +41,12 @@ import VendorManagement from "./pages/vendorManagement/vendorManagement.jsx";
 import MlmUser from "./pages/MLM User/MlmUser.jsx";
 import MlmDetails from "./pages/MLM User/MlmDetails.jsx";
 import MyContextProvider from "./context/MyContext.jsx";
+
 const router = createBrowserRouter([
+  {
+    path: "/", // Public login route
+    element: <Login />,
+  },
   {
     path: "/", // Main application route
     element: (
@@ -52,7 +57,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/", // Layout with nested routes
+        path: "/admin", // Layout with nested routes
         element: <Layout />,
         children: [
           {

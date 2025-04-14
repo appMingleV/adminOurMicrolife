@@ -10,6 +10,9 @@ const MyContextProvider = (props) => {
   const [allNewMlmUser, setAllNewMlmUser] = useState([]);
   const [singleNewMlmUser, setSingleNewMlmUser] = useState([]);
 
+
+  console.log(API_BASE_URL_NODE,"======================>>>>>>>")
+
   const getNewMlmUser = () => {
     axios
       .get(`${API_BASE_URL_NODE}api/admin/newMLMUser`)
@@ -33,6 +36,23 @@ const MyContextProvider = (props) => {
         console.log(error);
       });
   };
+
+
+
+  const [allOder,setAllOrder]=useState(null)
+  const getAllOrder=async()=>{
+   await axios.get(`https://api.ourmicrolife.com/api/admin/eco/orders`)
+   .then((response)=>{
+        console.log(response)
+   }) 
+   .catch((error)=>{
+       console.log(error)
+   })   
+
+  }
+
+  
+
   const value = {
     navigate,
     API_BASE_URL_NODE,
@@ -41,6 +61,7 @@ const MyContextProvider = (props) => {
 
     singleNewMlmUser,
     getSingleNewMlmUser,
+    getAllOrder
   };
   return (
     <MyContext.Provider value={value}>{props.children}</MyContext.Provider>
