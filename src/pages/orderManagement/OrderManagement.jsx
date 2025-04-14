@@ -12,11 +12,13 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MainHeader from "../mainHeader/MainHeader";
+import { MyContext } from "../../context/MyContext";
 
 const OrderManagement = () => {
+  const {getAllOrder}=useContext(MyContext)
   const [activeTable, setActiveTable] = useState("Total Order");
   const navigate = useNavigate();
 
@@ -60,6 +62,9 @@ const OrderManagement = () => {
     ],
     // Add more data for other cards...
   };
+  useEffect(()=>{
+    getAllOrder()
+  },[])
 
   return (
     <div className="p-6">
