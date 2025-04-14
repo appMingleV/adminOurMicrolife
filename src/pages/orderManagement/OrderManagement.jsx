@@ -18,7 +18,7 @@ import MainHeader from "../mainHeader/MainHeader";
 import { MyContext } from "../../context/MyContext";
 
 const OrderManagement = () => {
-  const {getAllOrder}=useContext(MyContext)
+  const {getAllOrder,allOder}=useContext(MyContext)
   const [activeTable, setActiveTable] = useState("Total Order");
   const navigate = useNavigate();
 
@@ -65,6 +65,10 @@ const OrderManagement = () => {
   useEffect(()=>{
     getAllOrder()
   },[])
+
+
+
+  console.log(allOder,"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 
   return (
     <div className="p-6">
@@ -123,9 +127,9 @@ const OrderManagement = () => {
             <TableHead>
               <TableRow>
                 <TableCell>Order ID</TableCell>
-                <TableCell>User</TableCell>
-                <TableCell>Mobile</TableCell>
-                <TableCell>Location</TableCell>
+                <TableCell>User ID</TableCell>
+                {/* <TableCell>Mobile</TableCell> */}
+                {/* <TableCell>Location</TableCell> */}
                 <TableCell>Payment</TableCell>
                 <TableCell>Status</TableCell>
                 <TableCell>Total Order</TableCell>
@@ -135,21 +139,21 @@ const OrderManagement = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {tableData[activeTable]?.map((row) => (
+              {allOder?.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell>{row.id}</TableCell>
-                  <TableCell>{row.user}</TableCell>
-                  <TableCell>{row.mobile}</TableCell>
-                  <TableCell>{row.location}</TableCell>
-                  <TableCell>{row.payment}</TableCell>
-                  <TableCell>{row.status}</TableCell>
-                  <TableCell>{row.totalOrder}</TableCell>
-                  <TableCell>{row.totalSales}</TableCell>
-                  <TableCell>{row.date}</TableCell>
+                  <TableCell>{row.user_id}</TableCell>
+                  {/* <TableCell>{row.mobile}</TableCell> */}
+                  {/* <TableCell>{row.location}</TableCell> */}
+                  <TableCell>{row.payment_type}</TableCell>
+                  <TableCell>{row.payment_status}</TableCell>
+                  <TableCell>{row.total_items}</TableCell>
+                  <TableCell>{row.total_amount}</TableCell>
+                  <TableCell>{row.created_at}</TableCell>
                   <TableCell>
                     <Button
                       variant={"contained"}
-                      onClick={() => navigate("./order-detail")}
+                      onClick={() => navigate(`/admin/orders/order-detail/${row.id}`)}
                     >
                       View Details
                     </Button>

@@ -43,7 +43,8 @@ const MyContextProvider = (props) => {
   const getAllOrder=async()=>{
    await axios.get(`https://api.ourmicrolife.com/api/admin/eco/orders`)
    .then((response)=>{
-        console.log(response)
+        console.log(response.data.data)
+        setAllOrder(response.data.data)
    }) 
    .catch((error)=>{
        console.log(error)
@@ -61,7 +62,8 @@ const MyContextProvider = (props) => {
 
     singleNewMlmUser,
     getSingleNewMlmUser,
-    getAllOrder
+    getAllOrder,
+    allOder
   };
   return (
     <MyContext.Provider value={value}>{props.children}</MyContext.Provider>

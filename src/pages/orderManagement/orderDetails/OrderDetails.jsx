@@ -6,9 +6,31 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const OrderDetails = () => {
+  const [orderDetail,setOrderDetail]=useState(null)
+  const {id}=useParams()
+
+
+  useEffect(()=>{
+       const getOrderDetail=async()=>{
+        await axios.get(`https://api.ourmicrolife.com/api/admin/eco/orderItems/${id}`)
+        .then((response)=>{
+            console.log(response.data.data)
+            setOrderDetail(response.data.data)
+        })
+        .catch((error)=>{
+             console.log(error)
+        })
+       }
+       getOrderDetail()
+  },[id])
+
+
+
   const orders = [
     {
       orderId: "ORD123456",
@@ -82,8 +104,8 @@ const OrderDetails = () => {
 
   return (
     <div className="p-6">
-      {orders.map((order, index) => (
-        <Card key={index} className="shadow-lg rounded-lg mb-6">
+      {orderDetail &&
+        <Card  className="shadow-lg rounded-lg mb-6">
           <CardContent>
             <Typography
               variant="h4"
@@ -92,50 +114,53 @@ const OrderDetails = () => {
               Order Details
             </Typography>
             <Grid container spacing={4}>
-              {/* Order Info */}
+             
               <Grid item xs={12} md={6}>
                 <Box className="border p-4 rounded-md">
                   <Typography variant="h6" className="font-semibold">
                     Order ID
                   </Typography>
-                  <Typography>{order.orderId}</Typography>
+                  <Typography>{orderDetail?.orderPayment[0]?.id}</Typography>
 
                   <Typography variant="h6" className="font-semibold mt-2">
                     Order Date
                   </Typography>
                   <Typography>
-                    {new Date(order.orderDate).toLocaleString()}
+                    {new Date(orderDetail?.orderPayment[0]?.updated_at).toLocaleString()}
                   </Typography>
 
                   <Typography variant="h6" className="font-semibold mt-2">
                     Order Status
                   </Typography>
-                  <Typography>{order.orderStatus}</Typography>
+                  <Typography>{orderDetail?.orderPayment[0]?.status}</Typography>
                 </Box>
               </Grid>
 
-              {/* Customer Details */}
+              
               <Grid item xs={12} md={6}>
                 <Box className="border p-4 rounded-md">
                   <Typography variant="h6" className="font-semibold">
                     Customer Details
                   </Typography>
-                  <Typography>Name: {order.customerDetails.name}</Typography>
-                  <Typography>Email: {order.customerDetails.email}</Typography>
-                  <Typography>Phone: {order.customerDetails.phone}</Typography>
+                  <Typography>Name: {orderDetail?.addressDetails[0]?.full_name}</Typography>
+                  {/* <Typography>Email: {orderDetail?.addressDetails[0]?.email}</Typography> */}
+                  <Typography>Phone: {orderDetail?.addressDetails[0]?.mobile_number}</Typography>
                   <Typography>
-                    Address: {order.customerDetails.address.street},{" "}
-                    {order.customerDetails.address.city},{" "}
-                    {order.customerDetails.address.state},{" "}
+                    Address: {orderDetail?.addressDetails[0]?.full_address},{" "}
+                    {orderDetail?.addressDetails[0]?.near_by_address},{" "}
+                    {orderDetail?.addressDetails[0]?.pin_code},{" "}
+                    {orderDetail?.addressDetails[0]?.city},{" "}
+                    {orderDetail?.addressDetails[0]?.state},{" "}
+                    {/* {order.customerDetails.address.state},{" "}
                     {order.customerDetails.address.zipCode},{" "}
-                    {order.customerDetails.address.country}
+                    {order.customerDetails.address.country} */}
                   </Typography>
                 </Box>
               </Grid>
             </Grid>
 
-            <Grid container spacing={4} className="mt-6">
-              {/* Items */}
+            {/* <Grid container spacing={4} className="mt-6">
+              
               <Grid item xs={12}>
                 <Box className="border p-4 rounded-md">
                   <Typography variant="h6" className="font-semibold">
@@ -155,7 +180,7 @@ const OrderDetails = () => {
                 </Box>
               </Grid>
 
-              {/* Payment Details */}
+              
               <Grid item xs={12} md={6}>
                 <Box className="border p-4 rounded-md">
                   <Typography variant="h6" className="font-semibold">
@@ -173,7 +198,6 @@ const OrderDetails = () => {
                 </Box>
               </Grid>
 
-              {/* Coupon Applied */}
               <Grid item xs={12} md={6}>
                 <Box className="border p-4 rounded-md">
                   <Typography variant="h6" className="font-semibold">
@@ -201,30 +225,30 @@ const OrderDetails = () => {
                   </Typography>
                 </Box>
               </Grid>
-            </Grid>
+            </Grid> */}
 
             <Grid container spacing={4} className="mt-6">
-              {/* Vendor Info */}
+              
               <Grid item xs={12}>
                 <Box className="border p-4 rounded-md">
                   <Typography variant="h6" className="font-semibold">
                     Vendors
                   </Typography>
-                  {order.items.map((item, index) => (
+                  {orderDetail?.orderItems.map((item, index) => (
                     <Box
                       key={index}
                       className="flex justify-between py-2 border-b"
                     >
-                      <Typography>{item.productName}</Typography>
-                      <Typography>{item.vendor.vendorName}</Typography>
-                      <Typography>{item.vendor.vendorContact}</Typography>
+                      <Typography>{item?.productName}</Typography>
+                      <Typography>{item?.vendor_id}</Typography>
+                      {/* <Typography>{item.vendor.vendorContact}</Typography> */}
                     </Box>
                   ))}
                 </Box>
               </Grid>
 
-              {/* Delivery Details */}
-              <Grid item xs={12} md={6}>
+              
+              {/* <Grid item xs={12} md={6}>
                 <Box className="border p-4 rounded-md">
                   <Typography variant="h6" className="font-semibold">
                     Delivery Details
@@ -245,18 +269,18 @@ const OrderDetails = () => {
                     ).toLocaleDateString()}
                   </Typography>
                 </Box>
-              </Grid>
+              </Grid> */}
 
-              {/* Total & Final Amount */}
+             
               <Grid item xs={12} md={6}>
                 <Box className="border p-4 rounded-md">
                   <Typography variant="h6" className="font-semibold">
                     Amount Summary
                   </Typography>
-                  <Typography>Total Amount: ₹{order.totalAmount}</Typography>
-                  <Typography>Discount: ₹{order.discount}</Typography>
+                  <Typography>Total Amount: ₹{orderDetail?.orderPayment[0]?.total_amount}</Typography>
+                  <Typography>Discount: ₹{orderDetail?.orderPayment[0]?.net_amount}</Typography>
                   <Typography className="font-bold">
-                    Final Amount: ₹{order.finalAmount}
+                    Final Amount: ₹{orderDetail?.orderPayment[0]?.net_amount}
                   </Typography>
                 </Box>
               </Grid>
@@ -272,7 +296,7 @@ const OrderDetails = () => {
             </Box>
           </CardContent>
         </Card>
-      ))}
+      }
     </div>
   );
 };

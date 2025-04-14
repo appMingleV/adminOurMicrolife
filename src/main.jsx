@@ -101,7 +101,7 @@ const router = createBrowserRouter([
             element: <OrderManagement />,
           },
           {
-            path: "/admin/orders/order-detail",
+            path: "/admin/orders/order-detail/:id",
             element: <OrderDetails />,
           },
           {

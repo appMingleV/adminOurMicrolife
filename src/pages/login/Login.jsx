@@ -54,7 +54,7 @@ function Login() {
             </label>
             <input
               type="text"
-              placeholder="Enter your email"
+              placeholder="Enter your password"
               className="text-xl px-3 py-2 border-2 rounded-md outline-none "
               value={password}
               onChange={(e)=>{
