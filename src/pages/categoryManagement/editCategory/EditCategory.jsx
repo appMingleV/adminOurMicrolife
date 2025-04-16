@@ -33,7 +33,7 @@ const EditCategory = () => {
     const fetchCategory = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}admin/categories/get/cate_id_${id}`,
+          `${import.meta.env.VITE_BASE_URL_RENDER}admin/category/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -41,8 +41,9 @@ const EditCategory = () => {
           }
         );
 
+        console.log(response);
         // Map response data to the state
-        const { categorie_name, image } = response.data.Category;
+        const { categorie_name, image } = response.data.data;
         setCategory({
           name: categorie_name,
           image, // Use the image URL for preview
@@ -167,7 +168,7 @@ const EditCategory = () => {
               src={
                 category.image instanceof File
                   ? URL.createObjectURL(category.image)
-                  : `${import.meta.env.VITE_BASE_URL}${category.image}`
+                  : `${import.meta.env.VITE_BASE_URL_NODE}uploads/categories/${category.image}`
               }
               alt="Uploaded category"
               style={{ width: "150px", height: "100px" }}

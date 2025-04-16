@@ -49,7 +49,7 @@ const SubCategoryManagement = () => {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL_RENDER}admin/category`
       );
-      setCategory(response.data.data); // Set categories from API response
+      setCategory(response?.data?.data); // Set categories from API response
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -61,8 +61,8 @@ const SubCategoryManagement = () => {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL_RENDER}admin/subategory/category/${categoryId}`
       );
-      setRows(response.data.data);
-      console.log("subcategory by id", response.data.data); // Set subcategories for the selected category
+      setRows(response?.data?.data);
+      console.log("subcategory by id", response?.data?.data); // Set subcategories for the selected category
     } catch (error) {
       console.error("Error fetching subcategories:", error);
     }
@@ -173,7 +173,7 @@ const SubCategoryManagement = () => {
                 onChange={handleCategoryChange}
               >
                 <option value="">Select Category</option>
-                {category.map((cat) => (
+                {category?.map((cat) => (
                   <option key={cat.id} value={cat.id}>
                     {cat.categorie_name}
                   </option>
@@ -193,13 +193,13 @@ const SubCategoryManagement = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <TableRow key={row.id}>
-                    <TableCell>{row.sub_category_name}</TableCell>
+                {rows?.map((row) => (
+                  <TableRow key={row?.id}>
+                    <TableCell>{row?.sub_category_name}</TableCell>
                     <TableCell>
                       <img
-                        src={`${import.meta.env.VITE_BASE_URL_IMAGE_SUBCATEGORY}/${row.image}`}
-                        alt={row.sub_category_name}
+                        src={`${import.meta.env.VITE_BASE_URL_IMAGE_SUBCATEGORY}/${row?.image}`}
+                        alt={row?.sub_category_name}
                         style={{
                           width: "60px",
                           height: "60px",

@@ -3,7 +3,9 @@ import DownloadIcon from "@mui/icons-material/Download";
 import { Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -19,29 +21,38 @@ const VisuallyHiddenInput = styled("input")({
 
 const EditSubCategory = ({ subCategoryId }) => {
   // console.log(subCategoryId);
-
+  const {id}=useParams();
   const [subCategory, setSubCategory] = useState({
-    name: "",
+    sub_category_name: "",
     file: null,
-    oldImage: null, // For storing the old image URL
+    oldImage: '',
+    category_id:''
+     // For storing the old image URL
   });
 
   // Simulate fetching existing sub-category details
   useEffect(() => {
     // Replace this with an actual API call to fetch sub-category details
     const fetchSubCategory = async () => {
-      const data = {
-        name: "mobile", // Example pre-filled data
-        oldImage: "https://via.placeholder.com/150", // Example image URL
-      };
-      setSubCategory(data);
+       const response =await axios.get(`${import.meta.env.VITE_BASE_URL_RENDER}admin/subcategory/${id}`)
+      console.log("=====>  ",response?.data?.data)
+      setSubCategory({
+       sub_category_name: response?.data?.data?.sub_category_name || "",
+       oldImage:response?.data?.data?.image,
+       category_id:response?.data?.data?.category_id
+     })
+      // const data = {
+      //   name: "mobile", // Example pre-filled data
+      //   oldImage: "https://via.placeholder.com/150", // Example image URL
+      // };
+      // setSubCategory(data);
     };
 
     fetchSubCategory();
   }, [subCategoryId]);
 
   const handleInputChange = (e) => {
-    setSubCategory({ ...subCategory, name: e.target.value });
+    setSubCategory({ ...subCategory, sub_category_name: e.target.value });
   };
 
   const handleFileChange = (e) => {
@@ -49,9 +60,16 @@ const EditSubCategory = ({ subCategoryId }) => {
     setSubCategory({ ...subCategory, file });
   };
 
-  const handleSave = () => {
+  const handleSave = async() => {
     // Handle form submission logic
-    console.log("Updated Sub Category:", subCategory);
+    // const response=await axios.put()
+    const formData=new FormData();
+    formData.append('sub_category_name',subCategory?.sub_category_name);
+    formData.append('image',subCategory?.file)
+    formData.append('category_id',subCategory.category_id)
+    const response=await axios.put(`http://127.0.0.1:8000/api/admin/subcategory/${id}`,formData);
+    console.log(response);
+    // console.log("Updated Sub Category:", subCategory);
   };
 
   return (
@@ -91,7 +109,7 @@ const EditSubCategory = ({ subCategoryId }) => {
               id="outlined-basic"
               label="Sub Category Name"
               variant="outlined"
-              value={subCategory.name}
+              value={subCategory.sub_category_name}
               onChange={handleInputChange}
             />
           </Box>
@@ -130,7 +148,7 @@ const EditSubCategory = ({ subCategoryId }) => {
           <Box mt={3}>
             <Typography variant="subtitle1">Current Image:</Typography>
             <img
-              src={subCategory.oldImage}
+              src={`${import.meta.env.VITE_BASE_URL_NODE}uploads/categories/subcategories/${subCategory.oldImage}`}
               alt="Old Sub Category"
               style={{
                 maxWidth: "150px",

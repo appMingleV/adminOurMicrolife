@@ -9,7 +9,7 @@ const MainHeader = (props) => {
       {/* Header */}
       <div className="container mx-auto p-5">
         <header className="flex justify-between px-5">
-          <Typography variant="h4">{props.name}</Typography>
+          <Typography variant="h4">dgdgdgdsgs</Typography>
           <div className="flex gap-5 items-center">
             <button className="flex items-center gap-2">
               <DownloadIcon />

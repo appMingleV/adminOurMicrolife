@@ -155,7 +155,7 @@ const App = () => {
       navigation={NAVIGATION}
       branding={{
         logo: "",
-        title: "OurMicroLife",
+        title: "Shivohum",
       }}
     >
       <Outlet />
