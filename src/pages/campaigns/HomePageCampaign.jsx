@@ -242,7 +242,7 @@ const HomePageCampaign = () => {
             {/* First Image Section */}
             <div className="relative border w-[28%] h-[420px]">
               <img
-                src={`${import.meta.env.VITE_BASE_URL_NODE}uploads/campaign/${first.image}`}
+                src={`${import.meta.env.VITE_BASE_URL_IMAGE}uploads/campaign/${first.image}`}
                 alt="Campaign 1"
                 className="w-full h-full object-cover rounded-xl"
               />
@@ -361,7 +361,7 @@ const HomePageCampaign = () => {
           {/* First Image Section */}
           <div className="relative border w-[28%] h-[420px]">
             <img
-              src={`${import.meta.env.VITE_BASE_URL_NODE}uploads/campaign/${second.image}`}
+              src={`${import.meta.env.VITE_BASE_URL_IMAGE}uploads/campaign/${second.image}`}
               alt="Home Campaign 3"
               className="w-full h-full object-cover rounded-xl"
             />

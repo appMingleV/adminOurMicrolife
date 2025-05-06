@@ -161,7 +161,7 @@ const handleOpenUpdatePopup=()=>setOpenPopupEdit(true);
         <div className="py-4">
           <div className="relative border w-[100%] h-64">
             <img
-              src={`${import.meta.env.VITE_BASE_URL_NODE}uploads/campaign/${first.image}`}
+              src={`${import.meta.env.VITE_BASE_URL_IMAGE}uploads/campaign/${first.image}`}
               alt="https://images.pexels.com/photos/29684685/pexels-photo-29684685/free-photo-of-stylish-black-earbuds-on-wooden-surface.jpeg?auto=compress&cs=tinysrgb&w=600"
               className="w-full h-full object-cover rounded-xl border"
             />

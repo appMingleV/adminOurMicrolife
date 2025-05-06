@@ -199,7 +199,7 @@ const CartPageCampaign = () => {
           {/* First Image Section */}
           <div className="relative border w-[25%] h-[512px] mb-2">
             <img
-              src={`${import.meta.env.VITE_BASE_URL_NODE}uploads/campaign/${first.image}`}
+              src={`${import.meta.env.VITE_BASE_URL_IMAGE}uploads/campaign/${first.image}`}
               alt="Campaign 1"
               className="w-full h-full object-cover rounded-xl"
             />
@@ -373,7 +373,7 @@ const CartPageCampaign = () => {
         {/* Second Image Section */}
         <div className="relative border w-[100%] h-64">
           <img
-            src={`${import.meta.env.VITE_BASE_URL_NODE}uploads/campaign/${second.image}`}
+            src={`${import.meta.env.VITE_BASE_URL_IMAGE}uploads/campaign/${second.image}`}
             alt="Campaign 2"
             className="w-full h-full object-cover rounded-xl border"
           />
